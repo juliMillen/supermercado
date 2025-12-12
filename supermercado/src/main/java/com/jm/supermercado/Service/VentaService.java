@@ -70,6 +70,8 @@ public class VentaService {
 
         List<DetalleVenta> detalles = new ArrayList<>();
 
+        Double totalCalulado=0.0;
+
         for(DetalleVentaDTO detDTO : ventaDTO.getDetalles()){
             Producto prod = productoRepository.findByNombre(detDTO.getNombreProd()).orElseThrow(() ->new ProductoException("Producto no encontrado"));
 
@@ -80,6 +82,9 @@ public class VentaService {
             detalleV.setCantidad(detDTO.getCantProd());
             detalleV.setVenta(venta);
             detalles.add(detalleV);
+
+            //total calculado
+            totalCalulado= totalCalulado+(detDTO.getPrecio()*detDTO.getCantProd());
         }
 
         //setear lista de detalle venta
@@ -87,7 +92,7 @@ public class VentaService {
 
         //guardar en la BD
 
-        ventaRepository.save(venta);
+        venta = ventaRepository.save(venta);
 
         //mapeo para mostrar la salida
 

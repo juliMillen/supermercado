@@ -29,7 +29,7 @@ public class SucursalService {
     public SucursalDTO CrearSucursal(SucursalDTO dto){
         Sucursal sucursal = Sucursal.builder()
                 .nombre(dto.getNombre())
-                .direccion(dto.getNombre())
+                .direccion(dto.getDireccion())
                 .build();
         return Mapper.mapToDTO(sucursalRepository.save(sucursal));
 
@@ -38,7 +38,7 @@ public class SucursalService {
     public SucursalDTO ModificarSucursal(Long id,SucursalDTO dto){
         Sucursal aModificar = sucursalRepository.findById(id).orElseThrow(() -> new SucursalException("Sucursal no encontrada"));
         aModificar.setNombre(dto.getNombre());
-        aModificar.setDireccion(dto.getNombre());
+        aModificar.setDireccion(dto.getDireccion());
         return Mapper.mapToDTO(sucursalRepository.save(aModificar));
     }
 

@@ -1,6 +1,7 @@
 package com.jm.supermercado.Controller;
 
 import com.jm.supermercado.DTO.VentaDTO;
+import com.jm.supermercado.Entity.Venta;
 import com.jm.supermercado.Service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,8 @@ public class VentaController {
 
     @PostMapping("/crear")
     public ResponseEntity<VentaDTO> crearVenta(@RequestBody VentaDTO dto){
-        return new ResponseEntity<>(ventaService.crearVenta(dto), HttpStatus.OK);
+        VentaDTO nuevaVenta = ventaService.crearVenta(dto);
+        return new ResponseEntity<>(nuevaVenta, HttpStatus.OK);
     }
 
     @PutMapping("/actualizar/{id}")
